@@ -89,7 +89,7 @@ while len(report) < 15000:  # 15,000+ characters to approximate 15-35 pages
     report = "Your Numerology Report...\n"
     report += f"Personal Year: {data['personal_year']}\n"
     report += f"Love & Money Influence: {data['love_money_influence']}\n"
-    
+
     # Trim the report to avoid large responses
     return report[:70000]  # Trim at 70,000 characters (35 pages max)
     
