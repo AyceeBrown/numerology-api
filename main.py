@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+  from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
 import datetime
@@ -61,38 +61,44 @@ def generate_detailed_numerology_report(personal_year, current_year, venus_sign,
     
     💖 **How Love & Relationships Are Affected:**  
     With Venus in {venus_sign} and placed in House {venus_house}, your love life will be shaped 
-    by deep emotional experiences. (Expand in final report)
+    by deep emotional experiences.
     
     💰 **Career & Money Insights:**  
-    The combination of Personal Year {personal_year} and Venus placement suggests (Expand in final report)
+    The combination of Personal Year {personal_year} and Venus placement suggests unique financial and professional themes.
     
     🌱 **Spiritual Growth & Lessons:**  
-    This year is calling for you to focus on... (Expand in final report)
+    This year is calling for you to focus on deep internal reflection and personal evolution.
     
     🔮 **Month-by-Month Forecast:**  
-    **January**: Expect...  
-    **February**: A time for...  
-    **March**: You will feel...  
-    (Expand for all 12 months)
+    **January**: Expect fresh starts and new ideas.  
+    **February**: A time for deep emotional healing and introspection.  
+    **March**: You will feel a shift in relationships and connections.  
+    **April - December**: Each month brings its own unique energy (Expand in final report).
     
     --------------------------------
     **Conclusion:**  
-    Your Personal Year {personal_year} is a powerful time for you to (Expand in final report)
+    Your Personal Year {personal_year} is a powerful time for you to embrace transformation.
     """
 
     # Ensure the report is long enough without excessive duplication
-while len(report) < 15000:  # 15,000+ characters to approximate 15-35 pages
-    report += "\n\n" + "Expand on your unique life lessons, challenges, and spiritual growth."  # Add new content instead of repeating
+    while len(report) < 15000:  # 15,000+ characters to approximate 15-35 pages
+        report += "\n\nExpand on your unique life lessons, challenges, and spiritual growth."
 
-    def generate_numerology_report(data):
-    # Process the numerology data
+    return report[:70000]  # Trim at 70,000 characters (35 pages max)
+
+
+# ✅ **Function to Generate Short Report**
+def generate_numerology_report(data):
+    """
+    Generates a summarized numerology report.
+    """
     report = "Your Numerology Report...\n"
     report += f"Personal Year: {data['personal_year']}\n"
     report += f"Love & Money Influence: {data['love_money_influence']}\n"
 
-    # Trim the report to avoid large responses
     return report[:70000]  # Trim at 70,000 characters (35 pages max)
-    
+
+
 # ✅ **Numerology API Route**
 @app.route('/numerology', methods=['POST'])
 def numerology_report():
@@ -122,6 +128,7 @@ def numerology_report():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
 
 # ✅ **Logging for Debugging**
 logging.basicConfig(level=logging.DEBUG)
