@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS  # Import CORS
 
 app = Flask(__name__)  # Initialize Flask first
+CORS(app, resources={r"/*": {"origins": "*"}})
 CORS(app)  # Now apply CORS
 
 # Universal Year for 2025
@@ -61,4 +62,5 @@ logging.basicConfig(level=logging.DEBUG)
 print("🔥 Numerology API is starting...")
 print(f"Running on PORT {port}")
 
-app.run(host="0.0.0.0", port=port, threaded=True)
+app.run(host="0.0.0.0", port=port, debug=True, threaded=True)
+
