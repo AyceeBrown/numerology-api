@@ -28,6 +28,53 @@ personal_year_data = {
     8: "A year of power, success, and financial growth.",
     9: "A year of closure, endings, and transformation."
 }
+# **NEW: Default route to prevent 404 error**
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({"message": "Welcome to the Numerology API! Use /test or /numerology"}), 200
+
+# Test route to check if API is working
+@app.route('/test', methods=['GET'])
+def test():
+    return jsonify({"message": "API is working!"}), 200
+
+# Function to calculate Personal Year
+def calculate_personal_year(birth_month, birth_day, current_year):
+    personal_year = (birth_month + birth_day + current_year) % 9
+    return 9 if personal_year == 0 else personal_year
+
+# Main API endpoint for Numerology Reports
+@app.route('/numerology', methods=['POST'])
+def numerology_report():
+    try:
+        data = request.get_json()
+        birth_month = int(data.get("birth_month"))
+        birth_day = int(data.get("birth_day"))
+        venus_sign = data.get("venus_sign", "Unknown")
+        venus_house = data.get("venus_house", "Unknown")
+        current_year = 2025  # Fixed for now
+
+        personal_year = calculate_personal_year(birth_month, birth_day, current_year)
+        personal_year_description = personal_year_data.get(personal_year, "No data available")
+
+        response = {
+            "personal_year": personal_year,
+            "year": current_year,
+            "theme": personal_year_description,
+            "universal_year_influence": f"Since {current_year} is a Universal Year {universal_year}, your Personal Year {personal_year} is influenced by collective transformation and endings.",
+            "love_money_influence": f"Your Venus placement in {venus_sign} (House {venus_house}) affects your love and financial themes this year."
+        }
+
+        return jsonify(response), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+# Ensure the correct port is used
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    print(f"🔥 Numerology API is starting on port {port}...")
+    app.run(host="0.0.0.0", port=port, debug=True, use_reloader=False)
 
 # Function to Calculate Personal Year
 def calculate_personal_year(birth_month, birth_day, current_year):
