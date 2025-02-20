@@ -102,6 +102,7 @@ def generate_numerology_report(data):
 # ✅ **Numerology API Route**
 @app.route('/numerology', methods=['POST'])
 def numerology_report():
+    
     """API to calculate Personal Year & return a numerology report."""
     try:
         data = request.get_json()
