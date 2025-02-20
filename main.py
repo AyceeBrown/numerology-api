@@ -80,9 +80,9 @@ def generate_detailed_numerology_report(personal_year, current_year, venus_sign,
     Your Personal Year {personal_year} is a powerful time for you to (Expand in final report)
     """
 
-    # Ensure the report is long enough
-    while len(report) < 15000:  # 15,000+ characters to approximate 15-35 pages
-        report += "\n\n" + report  # Duplicate content for expansion
+    # Ensure the report is long enough without excessive duplication
+while len(report) < 15000:  # 15,000+ characters to approximate 15-35 pages
+    report += "\n\n" + "Expand on your unique life lessons, challenges, and spiritual growth."  # Add new content instead of repeating
 
     return report[:70000]  # Trim at 70,000 characters (35 pages max)
 
