@@ -57,5 +57,5 @@ def numerology_report():
 if __name__ == '__main__':
     import os
 port = int(os.environ.get("PORT", 10000))  # Render assigns a dynamic PORT
-app.run(host="0.0.0.0", port=port)
+app.run(host="0.0.0.0", port=port, threaded=True)
 "Fixed port issue for Render"
