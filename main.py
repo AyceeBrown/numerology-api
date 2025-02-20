@@ -1,26 +1,17 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
+import datetime
+import logging
 
+# Initialize Flask App
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "*"}})  # Enable CORS
 
+# Test Route to Check API Status
 @app.route('/test', methods=['GET'])
 def test():
     return jsonify({"message": "API is working!"}), 200
-
-from flask import Flask, jsonify
-from flask_cors import CORS
-import os
-
-app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
-
-@app.route('/test', methods=['GET'])
-def test():
-    return jsonify({"message": "API is working!"}), 200
-    
-CORS(app)  # Now apply CORS
 
 # Universal Year for 2025
 universal_year = 9
@@ -38,16 +29,18 @@ personal_year_data = {
     9: "A year of closure, endings, and transformation."
 }
 
-# Function to calculate Personal Year
+# Function to Calculate Personal Year
 def calculate_personal_year(birth_month, birth_day, current_year):
     personal_year = (birth_month + birth_day + current_year) % 9
     return 9 if personal_year == 0 else personal_year
 
+# Main Numerology API Route
 @app.route('/numerology', methods=['POST'])
 def numerology_report():
-    """Flask API to calculate Personal Year & return a numerology report."""
+    """API to calculate Personal Year & return a numerology report."""
     try:
         data = request.get_json()
+
         birth_month = int(data.get("birth_month"))
         birth_day = int(data.get("birth_day"))
         venus_sign = data.get("venus_sign", "Unknown")
@@ -70,15 +63,13 @@ def numerology_report():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-# Use Render’s dynamic port
-port = int(os.environ.get("PORT", 10000))
-import logging
-
+# Configure Logging
 logging.basicConfig(level=logging.DEBUG)
 print("🔥 Numerology API is starting...")
+
+# Use Render’s Dynamic Port
+port = int(os.environ.get("PORT", 10000))
 print(f"Running on PORT {port}")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)), debug=True)
-
-
+    app.run(host="0.0.0.0", port=port, debug=True)
