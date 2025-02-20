@@ -65,5 +65,7 @@ logging.basicConfig(level=logging.DEBUG)
 print("🔥 Numerology API is starting...")
 print(f"Running on PORT {port}")
 
-app.run(host="0.0.0.0", port=port, debug=True, threaded=True)
+if __name__ == '__main__':
+    from gunicorn.app.wsgiapp import run
+    run()
 
