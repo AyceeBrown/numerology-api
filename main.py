@@ -4,6 +4,9 @@ from flask_cors import CORS  # Import CORS
 
 app = Flask(__name__)  # Initialize Flask first
 CORS(app, resources={r"/*": {"origins": "*"}})
+@app.route('/test', methods=['GET'])
+def test():
+    return jsonify({"message": "API is working!"}), 200
 CORS(app)  # Now apply CORS
 
 # Universal Year for 2025
