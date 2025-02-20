@@ -55,4 +55,10 @@ def numerology_report():
 
 # Use Render’s dynamic port
 port = int(os.environ.get("PORT", 10000))
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+print("🔥 Numerology API is starting...")
+print(f"Running on PORT {port}")
+
 app.run(host="0.0.0.0", port=port, threaded=True)
