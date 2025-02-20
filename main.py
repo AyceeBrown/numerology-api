@@ -8,6 +8,17 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 @app.route('/test', methods=['GET'])
 def test():
     return jsonify({"message": "API is working!"}), 200
+
+from flask import Flask, jsonify
+from flask_cors import CORS
+import os
+
+app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+@app.route('/test', methods=['GET'])
+def test():
+    return jsonify({"message": "API is working!"}), 200
     
 CORS(app)  # Now apply CORS
 
