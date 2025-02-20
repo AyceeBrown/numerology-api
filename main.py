@@ -39,7 +39,7 @@ def calculate_personal_year(birth_month, birth_day, current_year):
     personal_year = (birth_month + birth_day + current_year) % 9
     return 9 if personal_year == 0 else personal_year
 
-# ✅ **New Function: Generate a 15-35 Page Numerology Report**
+# ✅ **Function to Generate a 15-35 Page Numerology Report**
 def generate_detailed_numerology_report(personal_year, current_year, venus_sign, venus_house):
     """
     Generates an in-depth numerology report ensuring 15-35 pages of content.
@@ -86,7 +86,6 @@ def generate_detailed_numerology_report(personal_year, current_year, venus_sign,
 
     return report[:70000]  # Trim at 70,000 characters (35 pages max)
 
-
 # ✅ **Function to Generate Short Report**
 def generate_numerology_report(data):
     """
@@ -98,11 +97,9 @@ def generate_numerology_report(data):
 
     return report[:70000]  # Trim at 70,000 characters (35 pages max)
 
-
 # ✅ **Numerology API Route**
 @app.route('/numerology', methods=['POST'])
 def numerology_report():
-    
     """API to calculate Personal Year & return a numerology report."""
     try:
         data = request.get_json()
@@ -129,7 +126,6 @@ def numerology_report():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
 
 # ✅ **Logging for Debugging**
 logging.basicConfig(level=logging.DEBUG)
