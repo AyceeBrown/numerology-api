@@ -84,8 +84,15 @@ def generate_detailed_numerology_report(personal_year, current_year, venus_sign,
 while len(report) < 15000:  # 15,000+ characters to approximate 15-35 pages
     report += "\n\n" + "Expand on your unique life lessons, challenges, and spiritual growth."  # Add new content instead of repeating
 
+    def generate_numerology_report(data):
+    # Process the numerology data
+    report = "Your Numerology Report...\n"
+    report += f"Personal Year: {data['personal_year']}\n"
+    report += f"Love & Money Influence: {data['love_money_influence']}\n"
+    
+    # Trim the report to avoid large responses
     return report[:70000]  # Trim at 70,000 characters (35 pages max)
-
+    
 # ✅ **Numerology API Route**
 @app.route('/numerology', methods=['POST'])
 def numerology_report():
