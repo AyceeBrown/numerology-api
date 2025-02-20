@@ -1,9 +1,9 @@
+import os
 from flask import Flask, request, jsonify
-from flask_cors import CORS
-CORS(app)
-import datetime
+from flask_cors import CORS  # Import CORS
 
-app = Flask(__name__)
+app = Flask(__name__)  # Initialize Flask first
+CORS(app)  # Now apply CORS
 
 # Universal Year for 2025
 universal_year = 9
@@ -30,7 +30,6 @@ def calculate_personal_year(birth_month, birth_day, current_year):
 def numerology_report():
     """Flask API to calculate Personal Year & return a numerology report."""
     try:
-        # Parse request data
         data = request.get_json()
         birth_month = int(data.get("birth_month"))
         birth_day = int(data.get("birth_day"))
@@ -38,11 +37,9 @@ def numerology_report():
         venus_house = data.get("venus_house", "Unknown")
         current_year = datetime.datetime.now().year
 
-        # Calculate Personal Year
         personal_year = calculate_personal_year(birth_month, birth_day, current_year)
         personal_year_description = personal_year_data.get(personal_year, "No data available")
 
-        # Generate Response
         response = {
             "personal_year": personal_year,
             "year": current_year,
@@ -56,8 +53,6 @@ def numerology_report():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-if __name__ == '__main__':
-    import os
-port = int(os.environ.get("PORT", 10000))  # Render assigns a dynamic PORT
+# Use Render’s dynamic port
+port = int(os.environ.get("PORT", 10000))
 app.run(host="0.0.0.0", port=port, threaded=True)
-"Fixed port issue for Render"
