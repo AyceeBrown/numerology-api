@@ -127,4 +127,5 @@ print(f"Running on PORT {port}")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))  # Use Render's dynamic port
+    print(f"🔥 Starting Numerology API on port {port}...")  # Debugging output
     app.run(host="0.0.0.0", port=port, debug=True, use_reloader=False)
